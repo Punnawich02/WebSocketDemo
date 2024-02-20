@@ -3,26 +3,27 @@ import {RootState} from "../store.ts";
 import Stomp from "stompjs";
 
 export enum messageType {
-    CHAT= 'CHAT',
-    JOIN = 'JOIN',
-    LEAVE = 'LEAVE'
+    CHAT= "CHAT",
+    JOIN = "JOIN",
+    LEAVE = "LEAVE"
 }
 interface webSocketMessage {
     sender: string;
     content: string;
     timestamp: string;
     type: messageType;
+    active: number;
 }
 interface webSocketState {
     isConnected: boolean;
     stompClient: Stomp.Client | undefined;
-    messages: webSocketMessage[] | undefined
+    messages: webSocketMessage[] | undefined;
 }
 
 const initialState: webSocketState = {
     isConnected: false,
     stompClient: undefined,
-    messages: []
+    messages: [],
 };
 
 export const webSocketSlice = createSlice({
